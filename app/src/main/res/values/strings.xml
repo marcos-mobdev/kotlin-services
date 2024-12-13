@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">kotlin-service</string>
+    <string name="my_service_description">Description for my service</string>
+</resources>
