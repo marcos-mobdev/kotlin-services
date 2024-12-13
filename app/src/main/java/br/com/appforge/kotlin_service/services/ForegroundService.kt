@@ -36,7 +36,11 @@ class ForegroundService : Service() {
     }
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
 
-        val channelId = "reminders"
+        val bundle = intent?.extras
+        val delayTime = bundle?.getLong("delayTime")
+        val validTime = delayTime ?: 1000L
+
+        val channelId = "location"
         val currentDate = System.currentTimeMillis()
         val notification = NotificationCompat.Builder(this, channelId).apply {
             setSmallIcon(R.drawable.ic_location_24)
@@ -59,7 +63,7 @@ class ForegroundService : Service() {
             repeat(10){ i ->
                 counter = i
                 Log.i("info_service", "Playing service: $counter")
-                delay(2000)
+                delay(validTime)
             }
             //Stop service manually
             stopSelf()

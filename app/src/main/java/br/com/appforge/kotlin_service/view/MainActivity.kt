@@ -44,26 +44,25 @@ class MainActivity : AppCompatActivity() , ServiceConnection{
 
         requestNotificationPermissions()
 
-        //val myService = Intent(this,MyService::class.java)
-        val myConnection = Intent(this, ForegroundService::class.java)
+        val foregroundService = Intent(this, ForegroundService::class.java)
         serviceConnection = this
 
 
         with(binding){
             btnStart.setOnClickListener {
-                //myConnection.putExtra("delayTime", 3000L)
+                foregroundService.putExtra("delayTime", 4000L)
 
                 //Required Android SDK >= 26 for Foreground service
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                    startForegroundService(myConnection)
+                    startForegroundService(foregroundService)
                 }else{
-                    startService(myConnection)
+                    startService(foregroundService)
                 }
 
-                bindService(myConnection, serviceConnection, BIND_AUTO_CREATE)
+                bindService(foregroundService, serviceConnection, BIND_AUTO_CREATE)
             }
             btnStop.setOnClickListener {
-                stopService(myConnection)
+                stopService(foregroundService)
                 unbindService(serviceConnection)
             }
 
