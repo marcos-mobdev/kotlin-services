@@ -7,7 +7,7 @@ import android.util.Log
 
 class ThreadService : Service() {
 
-    var myThread: MyThread? = null
+    var backgroundTaskThread: BackgroundTaskThread? = null
 
     override fun onBind(intent: Intent): IBinder? {
         return null
@@ -16,7 +16,6 @@ class ThreadService : Service() {
     override fun onCreate() {
         //Initialize resources
         super.onCreate()
-
         Log.i("info_service", "onCreate: Thread Service")
     }
 
@@ -26,16 +25,17 @@ class ThreadService : Service() {
         val validTime = delayTime ?: 2000L
 
 
-        myThread?.start()
-        myThread = MyThread(validTime)
+        backgroundTaskThread?.start()
+        backgroundTaskThread = BackgroundTaskThread(validTime)
         return super.onStartCommand(intent, flags, startId)
     }
 
     override fun onDestroy() {
+        //Finish resources
         super.onDestroy()
     }
 
-    inner class MyThread(val validTime:Long): Thread(){
+    inner class BackgroundTaskThread(val validTime:Long): Thread(){
         override fun start() {
             super.run()
             repeat(10){ counter ->

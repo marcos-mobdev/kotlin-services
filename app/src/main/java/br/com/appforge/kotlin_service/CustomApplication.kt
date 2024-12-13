@@ -11,12 +11,12 @@ class CustomApplication: Application() {
         createNotificationChannels()
     }
 
-    fun createNotificationChannels(){
-        val channelId = "reminders"
+    private fun createNotificationChannels(){
+        val channelId = "location"
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val channel = NotificationChannel(
                 channelId,
-                "Reminders",
+                "Location",
                 NotificationManager.IMPORTANCE_DEFAULT
             )
             getSystemService(NotificationManager::class.java).createNotificationChannel(channel)

@@ -35,7 +35,6 @@ class CoroutineService : Service() {
             }
             stopSelf()
         }
-
         return super.onStartCommand(intent, flags, startId)
     }
 
